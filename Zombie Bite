@@ -1,0 +1,58 @@
+; 
+; ------------------------------------------------------------------------------
+; Deal damage and then restore 20 belly. ghost type move i named "Zombie bite". works well with the mummy ability!... if it existed.
+; ------------------------------------------------------------------------------
+
+
+.relativeinclude on
+.nds
+.arm
+
+
+.definelabel MaxSize, 0x2598
+
+; Uncomment the correct version
+
+; For US
+;.include "lib/stdlib_us.asm"
+;.include "lib/dunlib_us.asm"
+;.definelabel MoveStartAddress, 0x02330134
+;.definelabel MoveJumpAddress, 0x023326CC
+;.definelabel DealDamage, 0x2332B20
+;.definelabel TryIncreaseBelly, 0x2316BB0
+
+; For EU
+;.include "lib/stdlib_eu.asm"
+;.include "lib/dunlib_eu.asm"
+;.definelabel MoveStartAddress, 0x02330B74
+;.definelabel MoveJumpAddress, 0x0233310C
+;.definelabel DealDamage, 0x2333560
+;.definelabel TryIncreaseBelly, 0x2317610
+
+; File creation
+.create "./code_out.bin", MoveStartAddress ; 0x02330B74
+	.org MoveStartAddress
+	.area MaxSize 
+  sub sp,sp,#0x4
+
+    mov r0,r9
+		mov r1,r4
+		mov r2,r8
+    move r3,#255
+    str r7[sp,#0]
+    bl DealDamage
+
+    mov r0,r9
+    mov r1,r9
+    mov r2,#20
+    mov r3,#20
+    str r7[sp,#1]
+    bl TryIncreaseBelly
+
+		; return:
+        add sp,sp,#0x4
+		b MoveJumpAddress
+		.pool
+	.endarea
+.close
+
