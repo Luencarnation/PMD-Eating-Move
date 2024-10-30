@@ -30,7 +30,7 @@
 ;.definelabel TryIncreaseBelly, 0x2317610
 
 ; File creation
-.create "./code_out.bin", MoveStartAddress ; 0x02330B74
+.create "./code_out.bin", 0x02330134 ; 0x02330B74
 	.org MoveStartAddress
 	.area MaxSize 
   sub sp,sp,#0x4
@@ -38,7 +38,7 @@
     mov r0,r9
     mov r1,r4
     mov r2,r8
-    move r3,#255
+    mov r3,#255
     str r7,[sp,#0]
     bl DealDamage
 
