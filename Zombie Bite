@@ -13,13 +13,13 @@
 
 ; Uncomment the correct version
 
-; For US
-;.include "lib/stdlib_us.asm"
-;.include "lib/dunlib_us.asm"
-;.definelabel MoveStartAddress, 0x02330134
-;.definelabel MoveJumpAddress, 0x023326CC
-;.definelabel DealDamage, 0x2332B20
-;.definelabel TryIncreaseBelly, 0x2316BB0
+ For US
+.include "lib/stdlib_us.asm"
+.include "lib/dunlib_us.asm"
+.definelabel MoveStartAddress, 0x02330134
+.definelabel MoveJumpAddress, 0x023326CC
+.definelabel DealDamage, 0x2332B20
+.definelabel TryIncreaseBelly, 0x2316BB0
 
 ; For EU
 ;.include "lib/stdlib_eu.asm"
@@ -49,7 +49,7 @@
     str r7[sp,#1]
     bl TryIncreaseBelly
 
-		; return:
+		 return:
         add sp,sp,#0x4
 		b MoveJumpAddress
 		.pool
